@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>해양 미세플라스틱과 하수처리장의 책임</title>
+
+  <style>
+    /* 
+      주제: 해양 미세플라스틱 문제에 대한 하수처리장의 책임 강화는 정당한가
+      목적: 선정한 3개 매체의 근거를 바탕으로 웹페이지형 데이터 인포그래픽 제작
+      구성: 문제 제기 → 실제 사례 → 과학적 근거 → 한계 → 정책 방향 → 나의 견해
+    */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      background: #f4fbff;
+      color: #173342;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 7vw;
+      background: rgba(244, 251, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26, 86, 108, 0.15);
+    }
+
+    .nav-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0b5269;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #37687a;
+    }
+
+    .nav-links a:hover {
+      color: #008eaa;
+    }
+
+    .hero {
+      min-height: 92vh;
+      padding: 70px 7vw 40px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 40px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0, 185, 220, 0.18), transparent 28%),
+        linear-gradient(180deg, #e9faff 0%, #f4fbff 70%, #ffffff 100%);
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 13px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: #dff6ff;
+      color: #056177;
+      font-size: 14px;
+      font-weight: 800;
+      border: 1px solid rgba(0, 139, 170, 0.16);
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.15;
+      letter-spacing: -1.8px;
+      color: #07384b;
+      margin-bottom: 20px;
+    }
+
+    .hero-question {
+      font-size: clamp(20px, 2.4vw, 30px);
+      font-weight: 900;
+      color: #0095a8;
+      margin: 22px 0;
+    }
+
+    .hero-desc {
+      max-width: 690px;
+      font-size: 18px;
+      color: #365b69;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid rgba(0, 116, 148, 0.18);
+      transition: 0.2s;
+    }
+
+    .button.primary {
+      background: #007d97;
+      color: white;
+      box-shadow: 0 12px 28px rgba(0, 125, 151, 0.22);
+    }
+
+    .button.secondary {
+      background: white;
+      color: #0b5c72;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .ocean-card {
+      position: relative;
+      min-height: 520px;
+      border-radius: 36px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.25)),
+        linear-gradient(180deg, #97e6f7 0%, #1a85a6 55%, #0a4864 100%);
+      box-shadow: 0 26px 70px rgba(6, 72, 100, 0.25);
+      border: 1px solid rgba(255,255,255,0.7);
+      overflow: hidden;
+    }
+
+    .sunlight {
+      position: absolute;
+      top: -20px;
+      right: 30px;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0.05) 68%);
+      opacity: 0.8;
+    }
+
+    .pipe {
+      position: absolute;
+      left: -10px;
+      bottom: 145px;
+      width: 180px;
+      height: 54px;
+      background: #5d7580;
+      border: 6px solid #334a54;
+      border-left: none;
+      border-radius: 0 24px 24px 0;
+    }
+
+    .pipe::after {
+      content: "";
+      position: absolute;
+      right: -18px;
+      top: 11px;
+      width: 28px;
+      height: 22px;
+      border-radius: 50%;
+      background: #5e737d;
+    }
+
+    .micro {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 10px rgba(255,255,255,0.7);
+      animation: drift 5s infinite ease-in-out;
+    }
+
+    .m1 { left: 190px; bottom: 160px; animation-delay: 0s; }
+    .m2 { left: 250px; bottom: 185px; width: 6px; height: 6px; animation-delay: 0.4s; }
+    .m3 { left: 315px; bottom: 130px; width: 10px; height: 10px; animation-delay: 0.8s; }
+    .m4 { left: 390px; bottom: 230px; width: 6px; height: 6px; animation-delay: 1.2s; }
+    .m5 { left: 470px; bottom: 170px; width: 9px; height: 9px; animation-delay: 1.6s; }
+    .m6 { left: 560px; bottom: 250px; width: 7px; height: 7px; animation-delay: 2s; }
+
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0); opacity: 0.9; }
+      50% { transform: translate(28px, -22px); opacity: 0.55; }
+    }
+
+    .jellyfish {
+      position: absolute;
+      right: 95px;
+      top: 115px;
+      width: 190px;
+      height: 240px;
+      animation: float 4s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+
+    .jelly-head {
+      width: 170px;
+      height: 110px;
+      border-radius: 90px 90px 38px 38px;
+      background: rgba(235, 255, 255, 0.72);
+      border: 3px solid rgba(255,255,255,0.85);
+      box-shadow: inset 0 -18px 40px rgba(0, 135, 165, 0.22);
+    }
+
+    .tentacles {
+      position: absolute;
+      top: 105px;
+      left: 24px;
+      display: flex;
+      gap: 18px;
+    }
+
+    .tentacles span {
+      width: 4px;
+      height: 105px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.78);
+      animation: wiggle 2.4s infinite ease-in-out;
+    }
+
+    .tentacles span:nth-child(2) { height: 135px; animation-delay: 0.2s; }
+    .tentacles span:nth-child(3) { height: 115px; animation-delay: 0.4s; }
+    .tentacles span:nth-child(4) { height: 145px; animation-delay: 0.6s; }
+    .tentacles span:nth-child(5) { height: 100px; animation-delay: 0.8s; }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(4deg); }
+      50% { transform: rotate(-5deg); }
+    }
+
+    .hero-label {
+      position: absolute;
+      left: 32px;
+      top: 30px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.78);
+      color: #0e5468;
+      font-weight: 900;
+      font-size: 15px;
+      max-width: 260px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    section {
+      padding: 86px 7vw;
+    }
+
+    .section-title {
+      max-width: 880px;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      color: #008ca6;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3vw, 44px);
+      color: #07384b;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .lead {
+      font-size: 17px;
+      color: #476a78;
+      max-width: 830px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(7, 56, 75, 0.08);
+      border: 1px solid rgba(0, 113, 141, 0.1);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      color: #07384b;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #476a78;
+      font-size: 15.5px;
+    }
+
+    .media-tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #e6f7fb;
+      color: #00758e;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: stretch;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .flow-step {
+      position: relative;
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      border: 1px solid rgba(0, 113, 141, 0.12);
+      box-shadow: 0 14px 32px rgba(7, 56, 75, 0.06);
+      min-height: 160px;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -18px;
+      top: 48%;
+      font-size: 28px;
+      font-weight: 900;
+      color: #0096ad;
+      z-index: 2;
+    }
+
+    .flow-icon {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .plant {
+      background: white;
+      border-radius: 28px;
+      padding: 26px;
+      border: 1px solid rgba(0, 113, 141, 0.12);
+      box-shadow: 0 18px 42px rgba(7, 56, 75, 0.08);
+    }
+
+    .plant.bad {
+      border-top: 8px solid #f1a35c;
+    }
+
+    .plant.good {
+      border-top: 8px solid #38b994;
+    }
+
+    .plant h3 {
+      font-size: 24px;
+      color: #07384b;
+      margin-bottom: 8px;
+    }
+
+    .big-number {
+      margin: 18px 0 10px;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.05;
+      font-weight: 950;
+      color: #005f76;
+      letter-spacing: -1.4px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #678391;
+    }
+
+    .bar-wrap {
+      margin-top: 18px;
+      background: #eaf5f8;
+      border-radius: 999px;
+      height: 18px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #00a2bd, #37c6a3);
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    .chart {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 18px 42px rgba(7, 56, 75, 0.08);
+      border: 1px solid rgba(0, 113, 141, 0.12);
+      margin-top: 30px;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 70px;
+      gap: 14px;
+      align-items: center;
+      margin: 18px 0;
+    }
+
+    .chart-label {
+      font-weight: 900;
+      color: #17485a;
+    }
+
+    .chart-bar-bg {
+      height: 30px;
+      border-radius: 999px;
+      background: #e8f4f8;
+      overflow: hidden;
+    }
+
+    .chart-bar {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #0b8faa, #39c6a0);
+    }
+
+    .chart-value {
+      text-align: right;
+      font-weight: 900;
+      color: #005f76;
+    }
+
+    .simulator {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .control {
+      background: #07384b;
+      color: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 20px 52px rgba(7, 56, 75, 0.2);
+    }
+
+    .control h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .control p {
+      color: #d7edf3;
+      margin-bottom: 24px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #39c6a0;
+    }
+
+    .slider-value {
+      font-size: 36px;
+      font-weight: 950;
+      margin: 18px 0;
+      color: #ffffff;
+    }
+
+    .result {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      border: 1px solid rgba(0, 113, 141, 0.12);
+      box-shadow: 0 18px 42px rgba(7, 56, 75, 0.08);
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #e6f0f3;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-name {
+      color: #476a78;
+      font-weight: 800;
+    }
+
+    .result-num {
+      font-weight: 950;
+      color: #006b82;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .warning {
+      background: #fff8ed;
+      border: 1px solid rgba(224, 144, 45, 0.24);
+    }
+
+    .policy {
+      background: #effbf6;
+      border: 1px solid rgba(43, 179, 130, 0.22);
+    }
+
+    .opinion {
+      background:
+        radial-gradient(circle at top right, rgba(57, 198, 160, 0.18), transparent 34%),
+        #07384b;
+      color: white;
+      border-radius: 34px;
+      padding: 40px;
+      margin-top: 34px;
+      box-shadow: 0 22px 58px rgba(7, 56, 75, 0.22);
+    }
+
+    .opinion h2 {
+      color: white;
+    }
+
+    .opinion p {
+      color: #d9eef3;
+      font-size: 18px;
+    }
+
+    .opinion strong {
+      color: #8fffe1;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .source {
+      background: white;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 113, 141, 0.12);
+      box-shadow: 0 10px 28px rgba(7, 56, 75, 0.06);
+    }
+
+    .source a {
+      color: #00758e;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 42px 7vw;
+      background: #062f41;
+      color: #c9e4ec;
+      font-size: 14px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #6b8792;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .ocean-card {
+        min-height: 450px;
+      }
+
+      .grid,
+      .flow,
+      .comparison,
+      .simulator,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step:not(:last-child)::after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -28px;
+        transform: translateX(50%);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-title">해양 미세플라스틱 × 하수처리장 책임</div>
+    <div class="nav-links">
+      <a href="#issue">의제</a>
+      <a href="#case">사례</a>
+      <a href="#evidence">근거</a>
+      <a href="#limit">한계</a>
+      <a href="#opinion">견해</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <span class="badge">언어와 매체 수행평가 · 웹페이지형 데이터 인포그래픽</span>
+      <h1>해양 미세플라스틱 문제에 대한<br />하수처리장의 책임 강화는 정당한가</h1>
+      <p class="hero-desc">
+        해파리가 살아가는 바다를 조사하면서 해양 환경과 수질오염 문제에 주목했다.
+        이 페이지는 선정한 세 매체의 자료를 바탕으로, 하수처리장이 해양 미세플라스틱 문제에
+        어디까지 책임을 져야 하는지 따져 보기 위해 제작했다.
+      </p>
+      <div class="hero-question">바다로 가는 미세플라스틱, 하수처리장이 어디까지 막아야 할까?</div>
+      <div class="hero-buttons">
+        <a class="button primary" href="#issue">자료 흐름 보기</a>
+        <a class="button secondary" href="#opinion">나의 견해 보기</a>
+      </div>
+    </div>
+
+    <div class="ocean-card" aria-label="해파리와 하수 방류수, 미세플라스틱을 표현한 그림">
+      <div class="sunlight"></div>
+      <div class="hero-label">해파리의 바다를 지키는 문제는 결국 물의 상태를 묻는 문제다.</div>
+      <div class="pipe"></div>
+
+      <div class="micro m1"></div>
+      <div class="micro m2"></div>
+      <div class="micro m3"></div>
+      <div class="micro m4"></div>
+      <div class="micro m5"></div>
+      <div class="micro m6"></div>
+
+      <div class="jellyfish">
+        <div class="jelly-head"></div>
+        <div class="tentacles">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="issue">
+    <div class="section-title">
+      <div class="eyebrow">Issue Flow</div>
+      <h2>하수처리장은 왜 의제의 중심이 되는가</h2>
+      <p class="lead">
+        이 제작물은 미세플라스틱 전체 문제를 넓게 다루지 않는다.
+        의제와 직접 관련된 하수처리장 처리 공정, 해양 배출, 제거율, 모니터링, 비용 부담만 다룬다.
+      </p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon">🏠</div>
+        <h3>생활·도시 하수</h3>
+        <p>생활하수와 도시 배수에는 다양한 미세오염물질이 포함될 수 있다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">🏭</div>
+        <h3>하수처리장</h3>
+        <p>하수처리장은 오염된 물이 수환경으로 나가기 전 거치는 핵심 시설이다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">💧</div>
+        <h3>방류수·슬러지</h3>
+        <p>일부 입자는 방류수에 남고, 제거된 입자는 하수슬러지에 축적될 수 있다.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">🌊</div>
+        <h3>해양 환경</h3>
+        <p>처리 과정의 수준은 바다로 나가는 미세플라스틱 양과 연결될 수 있다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="case">
+    <div class="section-title">
+      <div class="eyebrow">Media 2 · The Guardian</div>
+      <h2>실제 사례: 처리 공정이 다르면 배출량도 달라진다</h2>
+      <p class="lead">
+        The Guardian 기사는 시드니 하수처리시설 사례를 통해,
+        처리 공정의 차이가 해양으로 배출되는 미세플라스틱 양과 연결될 수 있음을 보여준다.
+      </p>
+    </div>
+
+    <div class="comparison">
+      <div class="plant bad">
+        <span class="media-tag">1차 처리 중심 사례</span>
+        <h3>Malabar 처리장</h3>
+        <p>하수를 바다로 내보내기 전 주로 1차 처리만 거치는 시설로 제시되었다.</p>
+        <div class="big-number">5.4억? 아니고<br />54억~1,200억 개/일</div>
+        <p class="note">The Guardian 기사에 제시된 하루 미세플라스틱 배출 추정량</p>
+        <div class="bar-wrap"><div class="bar" style="width:79%"></div></div>
+        <p class="small">미세플라스틱 제거율: 0~79%</p>
+      </div>
+
+      <div class="plant good">
+        <span class="media-tag">3차 처리 사례</span>
+        <h3>Cronulla 처리장</h3>
+        <p>추가 여과, 생물학적 처리, 자외선 소독을 포함하는 3차 처리를 사용한다.</p>
+        <div class="big-number">8,600만~3억 5,000만 개/일</div>
+        <p class="note">The Guardian 기사에 제시된 하루 미세플라스틱 배출 추정량</p>
+        <div class="bar-wrap"><div class="bar" style="width:98%"></div></div>
+        <p class="small">미세플라스틱 제거율: 98% 이상</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="evidence">
+    <div class="section-title">
+      <div class="eyebrow">Media 3 · RSC Review Paper</div>
+      <h2>과학적 근거: 처리 단계별 제거율은 차이가 있다</h2>
+      <p class="lead">
+        RSC 논문은 21개 연구를 비교해 하수처리장에서 미세플라스틱이 얼마나 제거되는지 정량적으로 검토했다.
+        이 자료는 책임 강화의 가능성과 한계를 함께 보여준다.
+      </p>
+    </div>
+
+    <div class="chart">
+      <h3>하수처리 단계별 평균 미세플라스틱 제거율</h3>
+
+      <div class="chart-row">
+        <div class="chart-label">2차 처리</div>
+        <div class="chart-bar-bg"><div class="chart-bar" style="width:88%"></div></div>
+        <div class="chart-value">88%</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label">3차 처리</div>
+        <div class="chart-bar-bg"><div class="chart-bar" style="width:94%"></div></div>
+        <div class="chart-value">94%</div>
+      </div>
+
+      <p class="small">
+        이 수치는 RSC 논문에서 21개 연구를 비교해 제시한 평균 제거율을 바탕으로 구성했다.
+      </p>
+    </div>
+
+    <div class="simulator">
+      <div class="control">
+        <h3>미니 시뮬레이션</h3>
+        <p>
+          유입되는 미세플라스틱 입자 수를 바꾸어 보면,
+          2차 처리와 3차 처리 후 남는 양이 어떻게 달라지는지 확인할 수 있다.
+        </p>
+        <label for="particles">유입 입자 수</label>
+        <input id="particles" type="range" min="1000" max="100000" step="1000" value="50000" />
+        <div class="slider-value"><span id="inputValue">50,000</span>개</div>
+        <p class="small" style="color:#c7e8f0;">
+          계산식: 남는 양 = 유입량 × (1 - 제거율)
+        </p>
+      </div>
+
+      <div class="result">
+        <h3>처리 후 남는 입자 수</h3>
+        <div class="result-item">
+          <span class="result-name">2차 처리 후 남는 양</span>
+          <span class="result-num" id="secondaryLeft">6,000개</span>
+        </div>
+        <div class="result-item">
+          <span class="result-name">3차 처리 후 남는 양</span>
+          <span class="result-num" id="tertiaryLeft">3,000개</span>
+        </div>
+        <p class="small">
+          이 계산은 이해를 돕기 위한 단순화된 시각화이다. 실제 배출량은 유입량, 처리 공정, 입자 크기,
+          시설 조건에 따라 달라질 수 있다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="limit">
+    <div class="section-title">
+      <div class="eyebrow">Limit & Policy</div>
+      <h2>책임 강화가 필요하지만, 무조건적인 요구는 부족하다</h2>
+      <p class="lead">
+        하수처리장의 책임을 강화하려면 과학적 한계와 제도적 방향을 함께 보아야 한다.
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="card warning">
+        <span class="media-tag">RSC 논문에서 확인한 한계</span>
+        <h3>방류수만 보면 부족하다</h3>
+        <p>
+          하수처리장은 원래 미세플라스틱 제거를 목적으로 설계된 시설이 아니다.
+          처리 과정에서 일부 미세플라스틱은 제거되지만, 일부는 방류수에 남을 수 있다.
+          또한 제거된 미세플라스틱은 하수슬러지에 축적될 수 있다.
+        </p>
+      </div>
+
+      <div class="card policy">
+        <span class="media-tag">European Commission 자료에서 확인한 방향</span>
+        <h3>모니터링과 비용 부담이 함께 필요하다</h3>
+        <p>
+          European Commission 자료는 개정된 도시하수처리 규칙에서 미세플라스틱과 PFAS의 체계적 모니터링을 요구한다고 제시한다.
+          또한 고도처리 비용을 오염 원인 산업이 주로 부담하도록 하는 방향을 설명한다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="opinion">
+    <div class="section-title">
+      <div class="eyebrow">My Position</div>
+      <h2>나의 견해</h2>
+      <p class="lead">
+        세 매체의 내용을 바탕으로 정리한 나의 결론이다.
+      </p>
+    </div>
+
+    <div class="opinion">
+      <h2>책임 강화는 정당하다. 그러나 단계적이고 균형 있게 이루어져야 한다.</h2>
+      <p>
+        나는 <strong>해양 미세플라스틱 문제에 대한 하수처리장의 책임 강화는 정당하다</strong>고 본다.
+        The Guardian의 시드니 사례처럼 처리 공정의 수준에 따라 바다로 나가는 미세플라스틱 양이 달라질 수 있다면,
+        하수처리장은 해양 오염을 줄이는 중요한 관리 지점이 된다.
+      </p>
+      <br />
+      <p>
+        그러나 RSC 논문에서 확인할 수 있듯이, 하수처리장은 처음부터 미세플라스틱 제거를 목적으로 설계된 시설은 아니다.
+        따라서 단순히 처리시설에만 책임을 떠넘기는 방식은 적절하지 않다.
+        방류수 관리, 하수슬러지 관리, 고도처리 기술의 한계까지 함께 고려해야 한다.
+      </p>
+      <br />
+      <p>
+        결국 바람직한 방향은 European Commission 자료처럼 미세플라스틱을 체계적으로 모니터링하고,
+        오염 발생 주체의 비용 부담까지 함께 논의하는 것이다.
+        하수처리장의 책임은 강화되어야 하지만, 그 책임은 기술 개선과 제도적 지원 속에서 현실적으로 강화되어야 한다.
+      </p>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="section-title">
+      <div class="eyebrow">Sources</div>
+      <h2>선정 매체</h2>
+      <p class="lead">
+        이 웹페이지는 아래 세 매체에서 의제와 직접 관련된 내용만 활용해 제작했다.
+      </p>
+    </div>
+
+    <div class="source-list">
+      <div class="source">
+        <strong>1. European Commission</strong><br />
+        New rules for more thorough and cost-effective urban wastewater management enter into force<br />
+        <a href="https://environment.ec.europa.eu/news/new-rules-urban-wastewater-management-set-enter-force-2024-12-20_en" target="_blank">
+          https://environment.ec.europa.eu/news/new-rules-urban-wastewater-management-set-enter-force-2024-12-20_en
+        </a>
+      </div>
+
+      <div class="source">
+        <strong>2. The Guardian</strong><br />
+        Sydney’s archaic sewerage system a ‘significant’ source of microplastic pollution into the sea<br />
+        <a href="https://www.theguardian.com/australia-news/2025/feb/16/sydney-sewerage-system-a-significant-source-of-microplastic-pollution-csiro-finds" target="_blank">
+          https://www.theguardian.com/australia-news/2025/feb/16/sydney-sewerage-system-a-significant-source-of-microplastic-pollution-csiro-finds
+        </a>
+      </div>
+
+      <div class="source">
+        <strong>3. RSC Publishing</strong><br />
+        Microplastics removal in wastewater treatment plants: a critical review<br />
+        <a href="https://pubs.rsc.org/en/content/articlehtml/2020/ew/d0ew00397b" target="_blank">
+          https://pubs.rsc.org/en/content/articlehtml/2020/ew/d0ew00397b
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      제작 의도: 해양 미세플라스틱 문제를 감정적인 환경 캠페인으로만 다루지 않고,
+      실제 사례, 과학적 근거, 정책 방향을 연결해 하수처리장의 책임 강화가 정당한지 판단하도록 구성함.
+    </p>
+  </footer>
+
+  <script>
+    // 미니 시뮬레이션 계산
+    // 2차 처리 평균 제거율: 88%
+    // 3차 처리 평균 제거율: 94%
+
+    const particles = document.getElementById("particles");
+    const inputValue = document.getElementById("inputValue");
+    const secondaryLeft = document.getElementById("secondaryLeft");
+    const tertiaryLeft = document.getElementById("tertiaryLeft");
+
+    function formatNumber(number) {
+      return Math.round(number).toLocaleString("ko-KR") + "개";
+    }
+
+    function updateSimulation() {
+      const input = Number(particles.value);
+
+      const secondary = input * (1 - 0.88);
+      const tertiary = input * (1 - 0.94);
+
+      inputValue.textContent = input.toLocaleString("ko-KR");
+      secondaryLeft.textContent = formatNumber(secondary);
+      tertiaryLeft.textContent = formatNumber(tertiary);
+    }
+
+    particles.addEventListener("input", updateSimulation);
+    updateSimulation();
+  </script>
+</body>
+</html>
